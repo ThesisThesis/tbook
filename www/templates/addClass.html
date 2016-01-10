@@ -1,0 +1,33 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add Class</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeAddClass()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="doLogin()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">Subject</span>
+          <input type="text" ng-model="loginData.username">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Course</span>
+          <input type="password" ng-model="loginData.password">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Year</span>
+          <input type="password" ng-model="loginData.password">
+        </label>
+        <label class="item item-input">
+          <span class="input-label">Section</span>
+          <input type="password" ng-model="loginData.password">
+        </label>
+        <label class="item">
+          <button class="button button-block button-positive" type="submit">Add Class</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>
