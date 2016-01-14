@@ -1,121 +1,103 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $http, $location) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+
+//ROOTSCOPE MEANS GLOBAL VARIABLE....
  
-  $scope.loginData = {};
-  $ionicModal.fromTemplateUrl('templates/login.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-  $scope.closeLogin = function() {
-    $scope.modal.hide();
-  };
-  $scope.login = function() {
-    $scope.modal.show();
-  };
-  $scope.doLogin = function() {
-    //console.log('Doing login', $scope.loginData);
-    $http.post( "http://localhost/test/back/MyApi/login" , $scope.loginData)
-      .success( function (reply) {
-          //$scope.servPostRep = Res;
-          if (reply.length > 0) {
-            console.log("Login Sucess");
-              //console.log($location.path());
-              //$location.path("/browse");
-              //console.log($location.path());
-            }
-          else {
-            console.log("Login Failed");
-
-          }
-
-          console.log(reply)
-
-        } )
-        .error(function ( error ) {
-          alert('error Res:' + error.message);
-          //console.log('error Res:' + error.message);
-        });
-
-     
-
-  //   $timeout(function() {
-  //     $scope.closeLogin(); 
-  //   }, 1000);
-  };
 })
 
-.controller('LoginCtrl', function($scope, $http, $location){
-$scope.loginData = {};
-$scope.signin = function(){
-  //console.log("naka login ko", $scope.loginData);
-  $http.post("http://localhost/test/back/MyApi/login" , $scope.loginData)
-  .success( function (reply) {
-          //$scope.servPostRep = Res;
-          if (reply.length > 0) {
-            console.log("Login Sucess");
-              $location.path("/app/homepage");
-            }
-          else {
-            console.log("Login Failed");
-          }
+.controller('PlaylistsCtrl', function($scope, $rootScope) {
+//declare rootscope to where and which controller cya gamiton...
+})
 
 
+.controller('loginCtrl', function($scope, $rootScope, $http, $state) {
+ $rootScope.loginData = {};
+ $rootScope.newAcc = {}; 
+ // $rootScope.newAcc = 
+ //  { 
+ //    firstame: "",
+ //    lastame: "",
+ //    middlename: "",
+ //    email: "",
+ //    username: "",
+ //    password: ""
+ //  };
+  $scope.signup = function(){
+    //console.log("naka click ka"); 
+    $http.post("http://localhost/FINAL/back/MyApi/register" , $rootScope.newAcc)
+    .success( function (reply) {
+      console.log(reply); 
+        alert("You are successfully registered!");
+         $rootScope.newAcc = {}; 
+         $rootScope.newAcc = 
+          { 
+            firstame: "",
+            lastame: "",
+            middlename: "",
+            email: "",
+            username: "",
+            password: ""
+          };
+    })
+        
+  };
+
+  $scope.doLogin = function() {
+  	 // $http.post("http://localhost/FINAL/back/MyApi/login" , $rootScope.loginData)
+  	 // .success( function (reply) {
+    //       if (reply.length > 0) {
+    //         console.log("Login Sucess");
+    //           $state.go('app.playlists');
+    //         }
+    //       else {
+    //         console.log("Login Failed");
+    //       }
+
+
+    //     })
+    //     .error(function ( error ) {
+    //       alert('error Res:' + error.message);
+    //       console.log('error Res:' + error.message);
+    //     });
+   //console.log('Doing login', $rootScope.loginData);
+   $state.go('app.playlists');
+     };
+})
+
+.controller('ClassCtrl', function($scope, $http){
+  $scope.classData={};
+  $scope.chaaaar={};
+  $scope.addClass= function(){
+     $http.post("http://localhost/FINAL/back/MyApi/addClass" , $scope.classData)
+    .success(function (reply ){
+      alert('naka add naka');
+  })
+  };
+
+   $scope.getData = function getData (){
+    $http.get("http://localhost/back/MyApi/testGet") // kong unsa ang url sa api. sa c.i kai /name_of_ci_proj/controller/method
+                                                    // note ayaw kalimti ang "http://" sa url kai ma horot imong bohuk ug bitad
+        .success( function ( response ) { // ang kining Respose(variable na ni) kai maoy gi reply sa server
+          console.log( "Server Response: " + response.reply );   
+          // alert( "Server Response: " + Response );   
+          //$scope.servGetRep = response.reply;  //  out put nato, miggy watchout sa lettercase :)
         } )
         .error(function ( error ) {
           alert('error Res:' + error.message);
           console.log('error Res:' + error.message);
         });
-};
-})
-
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
-  ];
-})
-
-
-.controller('AddClassCtrl', function($scope, $ionicModal, $timeout) {
-
-  // Form data for the login modal
-  //$scope.loginData = {};
-
-  // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/addClass.html', {
-    scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
-  });
-
-  // Triggered in the login modal to close it
-  $scope.closeAddClass = function() {
-    $scope.modal.hide();
   };
 
-  // Open the login modal
-  $scope.addClass = function() {
-    $scope.modal.show();
-  };
-
-  // Perform the login action when the user submits the login form
-  // $scope.doLogin = function() {
-  //   console.log('Doing login', $scope.loginData);
-
-  //   // Simulate a login delay. Remove this and replace with your login
-  //   // code if using a login system
-  //   $timeout(function() {
-  //     $scope.closeLogin();
-  //   }, 1000);
-  // };
+  // $scope.getClass = function(){
+  //    $http.get("http://localhost/FINAL/back/MyApi/viewSem")
+  //   .success(function (reply)){
+  //     console.log(reply);
+  //   }
+  // }
+ 
+    
 })
 
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
-

@@ -36,66 +36,24 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/search',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/search.html',
+        controller: 'ClassCtrl'
       }
     }
   })
 
-
-
-  .state('app.homepage', {
-    url: '/homepage',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/homepage.html'
-      }
-    }
+  .state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html',
+    controller: 'loginCtrl'
+    
   })
-
-  .state('app.classes', {
-    url: '/classes',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/classes.html',
-        controller: 'AddClassCtrl'
-      }
-    }
-  })
-
-  .state('app.section', {
-      url: '/section',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/section.html'
-        }
-      }
-    })
-
-  .state('app.grade', {
-      url: '/grade',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/grade.html'
-        }
-      }
-    })
-
-
-  .state('app.activities', {
-      url: '/activities',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/activities.html'
-        }
-      }
-    })
 
   .state('app.browse', {
       url: '/browse',
       views: {
         'menuContent': {
-          templateUrl: 'templates/browse.html',
-          controller: 'LoginCtrl'
+          templateUrl: 'templates/browse.html'
         }
       }
     })
@@ -119,5 +77,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/browse');
+  $urlRouterProvider.otherwise('/login');
 });

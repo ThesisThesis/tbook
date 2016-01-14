@@ -1,5 +1,31 @@
 <ion-view view-title="Search">
   <ion-content>
     <h1>Search</h1>
+    <div class="card">
+	  <label class="item item-input">
+	    <input type="text" placeholder="Section" ng-model="classData.section">
+	  </label>
+	  <label class="item item-input">
+	    <input type="text" placeholder="Schedule" ng-model="classData.schedule">
+	  </label>
+	  <label class="item item-input">
+	    <input type="text" placeholder="School Year" ng-model="classData.sy">
+	  </label>
+	  <label class="item item-input">
+	    <textarea placeholder="Subject" ng-model="classData.subject"></textarea>
+	  </label>
+	  <label class="item item-input item-select">
+	    <div class="input-label">
+	      Semester
+	    </div>
+	    <select>
+	      <option selected>Summer</option>
+	      <option>1st Semester</option>
+	      <option>2nd Semester</option>
+	    </select>
+	  </label>
+	  <button class="button button-block button-balanced" ng-click="addClass()">Add CLass</button>
+	</div>
+
   </ion-content>
 </ion-view>
